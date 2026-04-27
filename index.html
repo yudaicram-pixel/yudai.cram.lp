@@ -3,8 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>雄大塾 — スマホ・PC 両対応サンプル</title>
-  <meta name="description" content="スマホ・PCで表示されるアニメーション付きシングルページのサンプル" />
+  <title>雄大塾 | 個別指導</title>
   <style>
     :root{
       --bg-top:#12253c;
@@ -37,101 +36,58 @@
     nav{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
     nav a{padding:6px 10px;border-radius:8px;color:var(--muted);font-weight:700}
     nav a:hover{color:#fff;background:rgba(255,255,255,0.03)}
-    .cta{background:var(--accent);color:#07121f;padding:8px 12px;border-radius:8px;font-weight:800}
+    .cta{background:var(--accent);color:#07121f;padding:10px 20px;border-radius:8px;font-weight:800;display:inline-block}
 
     /* sections base */
-    section{width:100%;padding:56px 0;box-sizing:border-box}
-    section.even{background: linear-gradient(90deg, rgba(0,0,0,0.02), rgba(255,255,255,0));}
-    .section-inner{display:flex;flex-wrap:wrap;align-items:center;gap:24px;padding:0 20px;max-width:var(--maxw);margin:0 auto}
-    .section-left{flex:1 1 460px;min-width:260px}
-    .section-right{flex:0 0 420px;min-width:220px}
-    .section-photo{width:100%;height:auto;border-radius:10px;display:block;object-fit:cover;box-shadow:0 8px 26px rgba(0,0,0,0.45)}
+    section{width:100%;padding:80px 0;box-sizing:border-box}
+    section.even{background: rgba(255,255,255,0.02);}
+    .section-inner{display:flex;flex-wrap:wrap;align-items:center;gap:40px;padding:0 20px;max-width:var(--maxw);margin:0 auto}
+    .section-left{flex:1 1 400px;}
+    .section-right{flex:1 1 400px;}
+    
+    /* 画像の調整：PCで見切れる設定を優先 */
+    .section-photo{
+      width:100%;
+      aspect-ratio: 16 / 10; /* 画像の比率を固定 */
+      border-radius:12px;
+      display:block;
+      object-fit:cover; /* ここで「いい感じに見切れる」ように設定  */
+      box-shadow:0 12px 30px rgba(0,0,0,0.5);
+    }
 
-    h1{font-size:clamp(1.5rem,3.6vw,2.4rem);margin-bottom:12px}
-    h2{font-size:1.6rem;margin-bottom:12px;padding-left:10px;border-left:6px solid var(--accent)}
-    p{color:var(--muted);margin-bottom:10px}
+    h1{font-size:clamp(1.8rem,5vw,2.8rem);margin-bottom:20px;line-height:1.3}
+    h2{font-size:1.8rem;margin-bottom:20px;padding-left:12px;border-left:6px solid var(--accent)}
+    p{color:var(--muted);margin-bottom:20px}
 
-    /* courses (vertical by default) */
-    #courses .grid{display:grid;grid-template-columns:1fr;gap:16px}
-    .feature{background:var(--card);padding:16px;border-radius:10px;box-shadow:0 8px 22px rgba(0,0,0,0.45);transition:transform .45s var(--ease),box-shadow .35s var(--ease)}
+    /* courses */
+    #courses .grid{display:grid;grid-template-columns:1fr;gap:20px}
+    .feature{background:var(--card);padding:24px;border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,0.45);transition:transform .45s var(--ease)}
     .feature:nth-of-type(n+2){background:var(--card-strong);border-top:3px solid var(--accent)}
-    .feature h3{color:var(--accent);margin-bottom:6px}
-    .feature p{color:var(--muted);margin:0}
+    .feature h3{color:var(--accent);margin-bottom:8px}
 
     /* form */
-    form, input, textarea, button, label{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-    input,textarea{width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:transparent;color:#fff}
-    button{background:var(--accent);color:#07121f;padding:10px 14px;border:none;border-radius:8px;font-weight:800;cursor:pointer}
+    form input, form textarea{width:100%;padding:12px;margin:8px 0 20px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.02);color:#fff}
+    button{background:var(--accent);color:#07121f;padding:12px 24px;border:none;border-radius:8px;font-weight:800;cursor:pointer;width:100%}
 
-    /* animation initial states */
-    .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+    /* animations */
+    .reveal{opacity:0;transform:translateY(30px);transition:all .8s var(--ease)}
     .reveal.in{opacity:1;transform:none}
-    .fade-left{opacity:0;transform:translateX(-18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
-    .fade-left.in{opacity:1;transform:none}
-    .zoom-in{opacity:0;transform:scale(.96);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+    .zoom-in{opacity:0;transform:scale(.95);transition:all .8s var(--ease)}
     .zoom-in.in{opacity:1;transform:none}
-    .float{animation: floatY 6s ease-in-out infinite}
-    @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 
-    /* no-js: if JS disabled, show everything (safe fallback) */
-    html.no-js .reveal, html.no-js .fade-left, html.no-js .zoom-in { opacity:1; transform:none; }
+    /* LINE & Mobile Sticky */
+    .line-btn{display:inline-flex;align-items:center;gap:10px;background:#06c755;color:#fff;padding:14px 24px;border-radius:12px;font-weight:900;width:100%;justify-content:center}
+    .sticky-cta{position:fixed;left:0;right:0;bottom:0;padding:12px;background:rgba(7,18,31,0.95);backdrop-filter:blur(10px);display:none;z-index:999}
+    .sticky-cta .line{background:#06c755;color:#fff;display:block;text-align:center;padding:14px;border-radius:12px;font-weight:900}
 
-    
-    /* LINE CTA */
-    .line-btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      gap:10px;
-      background:#06c755;color:#fff;
-      padding:12px 18px;border-radius:12px;
-      font-weight:900;
-      box-shadow:0 10px 26px rgba(0,0,0,0.35);
-    }
-    .line-btn:hover{opacity:0.92}
-    .line-btn small{font-weight:700;opacity:0.9}
-
-    /* sticky CTA for mobile */
-    .sticky-cta{
-      position:fixed;left:0;right:0;bottom:0;
-      padding:12px 14px;
-      background:rgba(7,18,31,0.92);
-      backdrop-filter: blur(10px);
-      border-top:1px solid rgba(255,255,255,0.08);
-      display:none;
-      z-index:999;
-    }
-    .sticky-cta .inner{
-      max-width:var(--maxw);margin:0 auto;
-      display:flex;gap:10px;align-items:center;justify-content:space-between;
-    }
-    .sticky-cta a{
-      flex:1;
-      text-align:center;
-      padding:12px 14px;
-      border-radius:12px;
-      font-weight:900;
-    }
-    .sticky-cta .line{background:#06c755;color:#fff}
-    .sticky-cta .tel{background:var(--accent);color:#07121f}
-
-    @media (max-width:720px){
-      body{padding-bottom:80px;}
-      .sticky-cta{display:block;}
-      nav{gap:6px}
-      nav a{padding:6px 8px;font-size:0.95rem}
-    }
-
-    /* responsive */
-    @media (max-width:900px){
-      .section-right{flex-basis:300px}
-    }
-    @media (max-width:720px){
-      header{flex-direction:column;align-items:flex-start}
-      .section-inner{flex-direction:column}
-      .section-right{flex-basis:auto;order:2}
-      .section-left{order:1}
-      .section-photo{max-height:260px}
-      h1,h2{font-size:1.35rem}
-      section{padding:36px 0}
+    /* Mobile Adjustments */
+    @media (max-width:768px){
+      section{padding:50px 0} /* セクション上下の余白をスマホ用に縮小 */
+      .section-inner{gap:20px;flex-direction:column}
+      .section-photo{aspect-ratio: 16 / 9; max-height: 220px;} /* スマホで画像が縦に伸びすぎないよう制限  */
+      .sticky-cta{display:block}
+      body{padding-bottom:80px}
+      h1{font-size:1.6rem}
     }
   </style>
 </head>
@@ -139,179 +95,107 @@
   <div class="wrap">
     <header>
       <div class="brand">
-        <div class="logo" aria-hidden="true">塾</div>
+        <div class="logo">塾</div>
         <div>
           <div style="font-weight:800">雄大塾</div>
-          <div style="color:var(--muted);font-size:0.95rem">地域密着の個別指導</div>
+          <div style="color:var(--muted);font-size:0.85rem">地域密着の個別指導</div>
         </div>
       </div>
-      <nav aria-label="Primary">
-        <a href="#about" class="reveal">教室紹介</a>
-        <a href="#courses" class="reveal">コース</a>
-        <a href="#flow" class="reveal">体験</a>
-        <a href="#contact" class="reveal">お問い合わせ</a>
+      <nav>
+        <a href="#about">紹介</a>
+        <a href="#courses">コース</a>
+        <a href="#contact">問合せ</a>
       </nav>
     </header>
 
-    <!-- HERO -->
-    <section id="top" aria-labelledby="top-title">
+    <section id="top">
       <div class="section-inner">
         <div class="section-left">
-          <h1 id="top-title" class="reveal">雄大塾 — 個別に寄り添う学習</h1>
-          <p class="reveal">一人ひとりに合わせた学習計画で、成績アップと自己肯定感を両立します。まずは体験授業へ。</p>
-          <p><a class="cta reveal" href="#flow">体験を申し込む</a></p>
+          <h1 class="reveal">雄大塾<br>個別に寄り添う学習</h1>
+          <p class="reveal">一人ひとりに合わせた学習計画で、成績アップをサポートします。まずは無料体験から。</p>
+          <a class="cta reveal" href="#contact">体験を申し込む</a>
         </div>
         <div class="section-right">
-          <img src="https://placehold.jp/420x300.png" alt="教室の様子" class="section-photo zoom-in" />
+          <img src="https://placehold.jp/12253c/ffffff/600x400.png?text=教室イメージ1" alt="教室" class="section-photo zoom-in" />
         </div>
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="even" aria-labelledby="about-title">
+    <section id="about" class="even">
       <div class="section-inner">
         <div class="section-left">
-          <h2 id="about-title" class="reveal">教室紹介</h2>
-          <p class="reveal">静かな学習環境で、講師が一人ひとりに丁寧に寄り添います。定期テスト・受験対策まで対応。</p>
-          <ul style="color:var(--muted)" class="reveal">
-            <li>1:2 の個別指導</li>
-            <li>学習プラン作成・定期チェック</li>
-            <li>講師は研修済み・面接採用</li>
+          <h2 class="reveal">教室紹介</h2>
+          <p class="reveal">静かな環境で集中して学習に取り組めます。講師との対話を重視した指導スタイルです。</p>
+          <ul style="color:var(--muted); padding-left:20px" class="reveal">
+            <li>完全個別カリキュラム</li>
+            <li>集中できる自習スペース</li>
+            <li>定期的な学習相談</li>
           </ul>
         </div>
         <div class="section-right">
-          <img src="https://placehold.jp/420x300.png" alt="教室風景" class="section-photo float" />
+          <img src="https://placehold.jp/12253c/ffffff/600x400.png?text=教室イメージ2" alt="指導風景" class="section-photo zoom-in" />
         </div>
       </div>
     </section>
 
-    <!-- COURSES -->
-    <section id="courses" aria-labelledby="courses-title">
+    <section id="courses">
       <div class="section-inner">
         <div class="section-left">
-          <h2 id="courses-title" class="reveal">コース紹介</h2>
-          <p class="reveal">目的・ペースに合わせて選べるコースを用意しています。</p>
-          <div class="grid" aria-hidden="false">
+          <h2 class="reveal">コース・料金</h2>
+          <div class="grid">
             <div class="feature reveal">
-              <h3>週１コース <span style="font-size:0.9em;color:var(--muted)">(１時間)</span></h3>
-              <p>部活や習い事と両立したい方に。</p>
+              <h3>週1回コース</h3>
+              <p>月額 18,000円。部活と両立したい方に最適です。</p>
             </div>
             <div class="feature reveal">
-              <h3>週２コース <span style="font-size:0.9em;color:var(--muted)">(１回２時間)</span></h3>
-              <p>学習習慣をつけて成績安定を目指す方向け。</p>
-            </div>
-            <div class="feature reveal">
-              <h3>週３コース <span style="font-size:0.9em;color:var(--muted)">(１回２時間)</span></h3>
-              <p>志望校合格を本気で目指す方向け。</p>
-            </div>
-            <div class="feature reveal">
-              <h3>受験特訓コース <span style="font-size:0.9em;color:var(--muted)">(短期集中)</span></h3>
-              <p>過去問演習と実戦力強化を実施します。</p>
+              <h3>週2回コース</h3>
+              <h3>月額 32,000円。苦手克服や受験対策に。</h3>
             </div>
           </div>
         </div>
         <div class="section-right">
-          <img src="https://placehold.jp/420x300.png" alt="授業風景" class="section-photo zoom-in" />
+          <img src="https://placehold.jp/12253c/ffffff/600x400.png?text=コースイメージ" alt="授業" class="section-photo zoom-in" />
         </div>
       </div>
     </section>
 
-    <!-- FLOW / CONTACT -->
-    <section id="flow" class="even" aria-labelledby="flow-title">
+    <section id="contact" class="even">
       <div class="section-inner">
         <div class="section-left">
-          <h2 id="flow-title" class="reveal">体験の流れ</h2>
-          <ol style="color:var(--muted)" class="reveal">
-            <li>お問い合わせ（フォーム or 電話）</li>
-            <li>面談（保護者＋生徒）</li>
-            <li>無料体験授業（60分）</li>
-            <li>入塾手続き（契約で時間枠を確保）</li>
-          </ol>
-        </div>
-        <div class="section-right">
-          <img src="https://placehold.jp/420x260.png" alt="体験授業" class="section-photo fade-left" />
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" aria-labelledby="contact-title">
-      <div class="section-inner">
-        <div class="section-left">
-          <h2 id="contact-title" class="reveal">お問い合わせ</h2>
-          <p class="reveal" style="color:var(--muted)">LINEまたはお電話からお気軽にお問い合わせください。</p>
-          <p class="reveal" style="margin-top:14px;display:flex;gap:12px;flex-wrap:wrap">
-            <a class="line-btn" href="https://lin.ee/XXXXXXXX" target="_blank" rel="noopener">
-              LINEで体験申込 <small>（24時間OK）</small>
-            </a>
-            <a class="cta" href="tel:000-0000-0000">電話する</a>
-          </p>
-
-          <form onsubmit="return sendMail(event)" class="reveal" style="max-width:520px">
-            <label for="name">お名前</label>
-            <input id="name" required placeholder="例：山田 太郎" />
-            <label for="email" style="margin-top:8px">メール</label>
-            <input id="email" type="email" required placeholder="taro@example.com" />
-            <label for="message" style="margin-top:8px">ご用件</label>
-            <textarea id="message" rows="4" required placeholder="例：体験を申込みたい"></textarea>
-            <p style="margin-top:10px"><button type="submit">送信（メールを開く）</button></p>
+          <h2 class="reveal">お問い合わせ</h2>
+          <p class="reveal">LINEまたはフォームよりお気軽にご相談ください。</p>
+          <a class="line-btn reveal" href="https://lin.ee/8lfxGZa" target="_blank">LINEで問い合わせる</a>
+          
+          <form class="reveal" style="margin-top:30px">
+            <input type="text" placeholder="お名前" required>
+            <input type="email" placeholder="メールアドレス" required>
+            <textarea rows="4" placeholder="ご相談内容"></textarea>
+            <button type="submit">送信する</button>
           </form>
         </div>
-        <div class="section-right">
-          <img src="https://placehold.jp/420x260.png" alt="お問い合わせ" class="section-photo zoom-in" />
-        </div>
       </div>
     </section>
 
-    <footer style="text-align:center;padding:28px 0;color:var(--muted)">© 2025 雄大塾 — <a href="https://example.com" style="color:var(--accent)">公式サイトへ</a></footer>
+    <footer style="text-align:center;padding:40px 0;color:var(--muted);font-size:0.9rem">
+      &copy; 2026 雄大塾
+    </footer>
+  </div>
+
+  <div class="sticky-cta">
+    <a class="line" href="https://lin.ee/8lfxGZa">LINEで体験申込</a>
   </div>
 
   <script>
-    // remove no-js class early (so CSS fallback doesn't hide animations when JS available)
-    (function(){ document.documentElement.classList.remove('no-js'); })();
-
-    // safe IntersectionObserver setup after DOM ready
     document.addEventListener('DOMContentLoaded', function(){
-      try {
-        const items = document.querySelectorAll('.reveal, .fade-left, .zoom-in');
-        if (!('IntersectionObserver' in window)) {
-          // fallback: just reveal all
-          items.forEach(el=>el.classList.add('in'));
-          return;
-        }
-        const io = new IntersectionObserver((entries, obs) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('in');
-              obs.unobserve(entry.target);
-            }
-          });
-        }, {threshold: 0.18, rootMargin: '0px 0px -8% 0px'});
-        items.forEach(el => io.observe(el));
-      } catch (err) {
-        // if any error, ensure content visible
-        const items = document.querySelectorAll('.reveal, .fade-left, .zoom-in');
-        items.forEach(el => el.classList.add('in'));
-        console.error(err);
-      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+          }
+        });
+      }, {threshold: 0.1});
+      document.querySelectorAll('.reveal, .zoom-in').forEach(el => observer.observe(el));
     });
-
-    // mailto form
-    function sendMail(e){
-      e.preventDefault();
-      const n = document.getElementById('name').value.trim();
-      const em = document.getElementById('email').value.trim();
-      const msg = document.getElementById('message').value.trim();
-      const body = encodeURIComponent(`お名前: ${n}\nメール: ${em}\n\nご用件:\n${msg}`);
-      location.href = `mailto:yudai.cram@gmail.com?subject=お問い合わせ（サイト）&body=${body}`;
-      return false;
-    }
   </script>
-
-  <div class="sticky-cta" aria-label="固定お問い合わせバー">
-    <div class="inner">
-      <a class="line" href="https://lin.ee/8lfxGZa" target="_blank" rel="noopener">LINEで体験申込</a>
-    </div>
-  </div>
-
 </body>
 </html>
