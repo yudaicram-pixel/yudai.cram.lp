@@ -27,39 +27,41 @@
     a{color:var(--accent);text-decoration:none}
     .wrap{max-width:var(--maxw);margin:0 auto;padding:20px;position:relative;z-index:1}
     
-    /* ヘッダー修正：改行を防ぎ、収まりを良くする */
     header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:12px 0}
     .brand{display:flex;align-items:center;gap:12px}
-   .logo {
-  width: 56px;
-  height: 56px;
-  border-radius: 10px;
-  /* 背景を透明にし、影を消す設定 */
-  background: transparent; 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: none; 
-}
+    .logo {
+      width: 56px;
+      height: 56px;
+      background: transparent; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: none;
+    }
+    .logo img { width: 100%; height: 100%; object-fit: contain; }
+
     nav{display:flex;gap:5px;align-items:center;flex-wrap:nowrap}
     nav a{padding:6px 8px;border-radius:8px;color:var(--muted);font-weight:700;white-space:nowrap;font-size:0.9rem}
     nav a:hover{color:#fff;background:rgba(255,255,255,0.03)}
     
-    .cta{background:var(--accent);color:#07121f;padding:10px 20px;border-radius:8px;font-weight:800;display:inline-block}
     section{width:100%;padding:80px 0;box-sizing:border-box}
     section.even{background: rgba(255,255,255,0.02);}
     .section-inner{display:flex;flex-wrap:wrap;align-items:center;gap:40px;padding:0 20px;max-width:var(--maxw);margin:0 auto}
-    .section-left{flex:1 1 400px;}
-    .section-right{flex:1 1 400px;}
+    .section-left, .section-right{flex:1 1 400px;}
     
-    .section-photo{
-      width:100%;
-      aspect-ratio: 16 / 10;
-      border-radius:12px;
-      display:block;
-      object-fit:cover;
-      box-shadow:0 12px 30px rgba(0,0,0,0.5);
+    /* PC・スマホ両方で見切れないための画像設定 */
+    .section-photo {
+      width: 100%;
+      max-height: 550px; /* PCでの巨大化を防止 */
+      aspect-ratio: auto; 
+      border-radius: 12px;
+      display: block;
+      object-fit: contain; /* 画像全体を表示し、見切れを防ぐ */
+      background: rgba(255,255,255,0.02);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+      margin: 0 auto;
     }
+
     h1{font-size:clamp(1.8rem,5vw,2.8rem);margin-bottom:20px;line-height:1.3}
     h2{font-size:1.8rem;margin-bottom:20px;padding-left:12px;border-left:6px solid var(--accent)}
     p{color:var(--muted);margin-bottom:20px}
@@ -74,7 +76,6 @@
     .zoom-in{opacity:0;transform:scale(.95);transition:all .8s var(--ease)}
     .zoom-in.in{opacity:1;transform:none}
 
-    /* 下部固定ボタンエリア */
     .sticky-cta{position:fixed;left:0;right:0;bottom:0;padding:12px;background:rgba(7,18,31,0.95);backdrop-filter:blur(10px);z-index:999;display:flex;gap:8px}
     .sticky-cta .btn{flex:1;text-align:center;padding:12px 8px;border-radius:8px;font-size:0.85rem;font-weight:900;display:flex;align-items:center;justify-content:center;text-decoration:none}
     .sticky-line{background:#06c755;color:#fff}
@@ -83,42 +84,20 @@
     @media (max-width:768px){
       section{padding:50px 0}
       .section-inner{gap:20px;flex-direction:column}
-      .section-photo {
-      width: 100%;
-      /* 縦横比を固定せず、画像の元の比率を維持する */
-      aspect-ratio: auto; 
-      border-radius: 12px;
-      display: block;
-      /* 画像全体が収まるようにし、見切れを防ぐ */
-      object-fit: contain; 
-      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
-      /* PCで縦長画像が巨大化しすぎないよう高さを制限 */
-      max-height: 450px; 
-      margin: 0 auto;
-    }
-
-    /* スマホ用の調整 */
-    @media (max-width:768px){
-      .section-photo {
-        /* スマホでは画面の高さに合わせて、見やすいサイズに制限 */
-        max-height: 450px; 
-      }
-    }
+      .section-photo { max-height: 450px; } /* スマホで見やすい高さに制限 */
       body{padding-bottom:100px}
       h1{font-size:1.6rem}
-
-      
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-<div class="brand">
-  <div class="logo" style="background: transparent; box-shadow: none;">
-    <img src="wolfly.png" alt="雄大塾 ロゴ" style="width: 100%; height: 100%; object-fit: contain;">
-  </div>
-  <div>
+      <div class="brand">
+        <div class="logo">
+          <img src="wolfly.png" alt="雄大塾 ロゴ">
+        </div>
+        <div>
           <div style="font-weight:800">個別指導 雄大塾(個人)</div>
           <div style="color:var(--muted);font-size:0.85rem">京都市伏見区深草直違橋片町527-2</div>
         </div>
@@ -136,10 +115,10 @@
         <div class="section-left">
           <h1 class="reveal">雄大塾<br>寄り添う学習</h1>
           <p class="reveal">塾長自らが一人ひとりに合わせて、優しく丁寧に指導します。まずは無料体験から。</p>
-          <a class="cta reveal" href="#contact">体験・お問合せはこちら</a>
+          <a class="cta reveal" style="background:var(--accent);color:#07121f;padding:12px 24px;border-radius:8px;font-weight:800;" href="#contact">体験・お問合せはこちら</a>
         </div>
         <div class="section-right">
-          <img src="IMG_1141 2.jpeg" alt="教室" class="section-photo zoom-in" />
+          <img src="IMG_1141 2.jpg" alt="教室外観" class="section-photo zoom-in" />
         </div>
       </div>
     </section>
@@ -156,7 +135,7 @@
           </ul>
         </div>
         <div class="section-right">
-          <img src="IMG_0996 2.jpeg" alt="指導風景" class="section-photo zoom-in" />
+          <img src="IMG_0996 2.jpeg" alt="塾長" class="section-photo zoom-in" />
         </div>
       </div>
     </section>
@@ -176,7 +155,7 @@
           <p style="font-size:0.9rem; color:var(--muted)">※料金等は「募集学年・空き状況等」からご確認ください。</p>
         </div>
         <div class="section-right">
-          <img src="img1.jpg" alt="授業" class="section-photo zoom-in" />
+          <img src="IMG_1141 2.jpg" alt="コースイメージ" class="section-photo zoom-in" />
         </div>
       </div>
     </section>
@@ -188,13 +167,8 @@
           <p class="reveal">〒612-0867 京都市伏見区深草直違橋片町527-2（墨染駅より徒歩7分）</p>
           <div class="reveal" style="width:100%; border-radius:12px; overflow:hidden; box-shadow:0 12px 30px rgba(0,0,0,0.5); aspect-ratio: 16 / 9;">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3270.760113114979!2d135.7702813152382!3d34.94504108037286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60010f37f3747f53%3A0x607730e7845f067!2z44CSNjEyLTA4Njcg5Lqs6YO95bqc5Lqs6YO95biC5LyP6KaL5Yy65rex6I2J55u06YGV5qmL54mH55S677yV77yS77yX4oiS77yS!5e0!3m2!1sja!2sjp!4v1714200000000!5m2!1sja!2sjp" 
-              width="100%" 
-              height="100%" 
-              style="border:0; display:block;" 
-              allowfullscreen="" 
-              loading="lazy" 
-              referrerpolicy="no-referrer-when-downgrade">
+              src="http://googleusercontent.com/maps.google.com/6" 
+              width="100%" height="100%" style="border:0; display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
             </iframe>
           </div>
         </div>
@@ -215,13 +189,13 @@
     </section>
 
     <footer style="text-align:center;padding:40px 0;color:var(--muted);font-size:0.9rem">
-      &copy; 2026 雄大塾
+      © 2026 雄大塾
     </footer>
   </div>
 
   <div class="sticky-cta">
     <a class="btn sticky-line" href="https://lin.ee/8lfxGZa">LINEで<br>体験申込・お問合せ</a>
-    <a class="btn sticky-hp" href="https://curuchang.hatenablog.com/entry/2024/08/21/121912">最新の募集学年・<br>空き状況(HPへ)</a>
+    <a class="btn sticky-hp" href="https://curuchang.hatenablog.com/entry/2024/08/21/121912">最新の募集状況<br>(ブログへ)</a>
   </div>
 
   <script>
