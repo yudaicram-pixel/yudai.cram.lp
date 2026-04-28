@@ -73,9 +73,31 @@
     @media (max-width:768px){
       section{padding:50px 0}
       .section-inner{gap:20px;flex-direction:column}
-      .section-photo{aspect-ratio: 16 / 9; max-height: 220px;}
+      .section-photo {
+      width: 100%;
+      /* 縦横比を固定せず、画像の元の比率を維持する */
+      aspect-ratio: auto; 
+      border-radius: 12px;
+      display: block;
+      /* 画像全体が収まるようにし、見切れを防ぐ */
+      object-fit: contain; 
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+      /* PCで縦長画像が巨大化しすぎないよう高さを制限 */
+      max-height: 600px; 
+      margin: 0 auto;
+    }
+
+    /* スマホ用の調整 */
+    @media (max-width:768px){
+      .section-photo {
+        /* スマホでは画面の高さに合わせて、見やすいサイズに制限 */
+        max-height: 450px; 
+      }
+    }
       body{padding-bottom:100px}
       h1{font-size:1.6rem}
+
+      
     }
   </style>
 </head>
