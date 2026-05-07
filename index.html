@@ -56,9 +56,12 @@
     /* ヘッダー内の文字色を黒・濃いグレーに変更 */
     .brand div { color: #333 !important; }
     
-    /* 住所の色を少し薄いグレーに調整 */
-    .brand div div[style*="color:var(--muted)"] { color: #666 !important; }
-
+/* 住所の色を濃いグレー（または黒）に変更 */
+    .brand div div[style*="color:var(--muted)"] {
+      color: #333 !important; /* #666から#333に変更して濃くしました */
+      opacity: 0.9;            /* 透明度をほぼなくしてハッキリさせました */
+      font-weight: 500;       /* 少しだけ太くして視認性を上げました */
+    }
     nav { display: flex; gap: 5px; align-items: center; flex-wrap: nowrap; }
     
     /* ナビゲーションの文字色を黒系に変更 */
