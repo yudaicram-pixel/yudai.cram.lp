@@ -173,25 +173,76 @@
       </div>
     </section>
 
-    <section id="courses">
-      <div class="section-inner">
-        <div class="section-left">
-          <h2 class="reveal">コース紹介</h2>
-          <div class="feature reveal">
-            <h3>週1回コース</h3>
-            <p>部活動との両立や、まずは学習習慣を身につけたい方に。</p>
-          </div>
-          <div class="feature reveal">
-            <h3>週2回コース</h3>
-            <p>苦手科目の克服や、志望校合格に向けた受験対策に。</p>
-          </div>
-          <p style="font-size:0.9rem; color:var(--muted)">※料金等はページ下部のHPからご確認ください。</p>
-        </div>
-        <div class="section-right">
-          <img src="img1.jpg" alt="コースイメージ" class="section-photo zoom-in" />
+<section id="courses">
+  <style>
+    /* スライダー全体のコンテナ */
+    .slider-container {
+      width: 100%;
+      max-height: 550px;
+      aspect-ratio: 4 / 3; /* 塾の雰囲気が伝わりやすい比率 */
+      border-radius: 12px;
+      overflow: hidden; /* 枠外の画像を見えなくする */
+      position: relative;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+      background: rgba(255,255,255,0.02);
+    }
+
+    /* 画像を横に並べる枠 */
+    .slider-wrapper {
+      display: flex;
+      width: 300%; /* 3枚分なので300% */
+      height: 100%;
+      animation: slide-album 12s infinite; /* 12秒で一周、無限ループ */
+    }
+
+    /* 各画像の設定 */
+    .slider-wrapper img {
+      width: calc(100% / 3); /* 300%の中の1/3 */
+      height: 100%;
+      object-fit: cover; /* 枠に合わせて綺麗に切り抜き */
+    }
+
+    /* 横スライドアニメーションの定義 */
+    @keyframes slide-album {
+      0% { transform: translateX(0); }
+      30% { transform: translateX(0); }       /* 1枚目表示 */
+      33% { transform: translateX(-33.33%); } /* スライド移動 */
+      63% { transform: translateX(-33.33%); } /* 2枚目表示 */
+      66% { transform: translateX(-66.66%); } /* スライド移動 */
+      96% { transform: translateX(-66.66%); } /* 3枚目表示 */
+      100% { transform: translateX(0); }      /* 1枚目に戻る */
+    }
+
+    @media (max-width:768px){
+      .slider-container { max-height: 450px; }
+    }
+  </style>
+
+  <div class="section-inner">
+    <div class="section-left">
+      <h2 class="reveal">コース紹介</h2>
+      <div class="feature reveal">
+        <h3>週1回コース</h3>
+        <p>部活動との両立や、まずは学習習慣を身につけたい方に。</p>
+      </div>
+      <div class="feature reveal">
+        <h3>週2回コース</h3>
+        <p>苦手科目の克服や、志望校合格に向けた受験対策に。</p>
+      </div>
+      <p style="font-size:0.9rem; color:var(--muted)">※料金等はページ下部のHPからご確認ください。</p>
+    </div>
+
+    <div class="section-right">
+      <div class="slider-container zoom-in">
+        <div class="slider-wrapper">
+          <img src="1.jpeg" alt="コースイメージ1">
+          <img src="2.jpeg" alt="コースイメージ2">
+          <img src="3.jpeg" alt="コースイメージ3">
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
     <section id="access" class="even">
       <div class="section-inner">
