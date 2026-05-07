@@ -243,7 +243,68 @@
     </div>
   </div>
 </section>
+<section id="environment" class="even">
+      <style>
+        .env-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 24px;
+          margin-top: 30px;
+        }
+        .env-card {
+          background: var(--card-strong);
+          padding: 30px;
+          border-radius: 12px;
+          border: 1px solid rgba(212, 175, 55, 0.1);
+          transition: transform 0.3s var(--ease);
+        }
+        .env-card:hover {
+          transform: translateY(-5px);
+          border-color: var(--accent);
+        }
+        .env-icon {
+          font-size: 2rem;
+          margin-bottom: 15px;
+          display: block;
+        }
+        .env-card h3 {
+          color: var(--accent);
+          margin-bottom: 12px;
+          font-size: 1.25rem;
+        }
+        .env-card p {
+          font-size: 0.95rem;
+          margin-bottom: 0;
+        }
+      </style>
+      
+      <div class="section-inner">
+        <div style="flex:1 1 100%;">
+          <h2 class="reveal">教室環境</h2>
+          <p class="reveal">集中力を高めるための、整った設備をご用意しています。</p>
+          
+          <div class="env-grid">
+            <div class="env-card reveal">
+              <span class="env-icon">📖</span>
+              <h3>綺麗な自習スペース</h3>
+              <p>授業前後だけでなく、授業がない日も利用可能です。静かで落ち着いた空間で、学校の宿題や試験対策に集中できます。</p>
+            </div>
 
+            <div class="env-card reveal">
+              <span class="env-icon">📶</span>
+              <h3>高速Wi-Fi完備</h3>
+              <p>塾内ではフリーWi-Fiをご利用いただけます。タブレットを使った映像授業の視聴や、オンラインでの調べ物もスムーズです。</p>
+            </div>
+
+            <div class="env-card reveal">
+              <span class="env-icon">✨</span>
+              <h3>快適な学習環境</h3>
+              <p>適切な温度管理と換気、除菌を徹底。長時間座っても疲れにくい椅子を採用し、体への負担にも配慮しています。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <section id="access" class="even">
       <div class="section-inner">
         <div style="flex:1 1 100%;">
