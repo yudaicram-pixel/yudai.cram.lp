@@ -210,18 +210,28 @@
   border-color: var(--accent);
   box-shadow: 0 12px 30px rgba(0,0,0,0.6) !important;
 }
-    /* --- 追加分：全画面メニュー内の文字色を三本線と同じ色にする --- */
+/* --- 全画面メニュー内の文字デザイン調整 --- */
 #menu-overlay .overlay-nav a {
-  color: var(--accent) !important; /* 三本線と同じ金色に固定 */
-  font-size: 1.8rem;               /* 文字の大きさを少しアップ */
-  font-weight: 800;                /* 文字を太くしてハッキリさせる */
-  text-decoration: none;           /* 下線を消す */
-  transition: opacity 0.3s;        /* ホバー時の変化を滑らかに */
+  /* ①色を三本線より少しだけ落ち着いた色（透明度0.8）にする */
+  color: rgba(212, 175, 55, 0.8) !important; 
+  /* ③文字を少し小さく調整 */
+  font-size: 1.3rem;               
+  font-weight: 700;                
+  text-decoration: none;           
+  transition: all 0.3s;
+  letter-spacing: 0.05em; /* 文字の間隔を少し広げて上品に */
 }
 
-/* ホバーした時に少し透明にして反応を出す */
+/* ②背景の透明度を上げる（0.98から0.85へ変更） */
+#menu-overlay {
+  background: rgba(7, 18, 31, 0.85) !important;
+  backdrop-filter: blur(8px); /* 後ろをボカすことで、透けていても文字が読みやすくなります */
+}
+
+/* ホバー時に色をハッキリさせる演出 */
 #menu-overlay .overlay-nav a:hover {
-  opacity: 0.7;
+  color: var(--accent) !important;
+  opacity: 1;
 }
   </style>
 </head>
