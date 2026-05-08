@@ -375,61 +375,83 @@ footer {
   </div>
 </section>
 <section id="environment" class="even">
-      <style>
-        /* 教室環境セクション用のカスタムスタイル */
-        .env-content {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 40px;
-          align-items: flex-start;
-        }
-        .env-description {
-          flex: 1 1 450px; /* 説明文エリア */
-        }
-        .env-main-photo {
-          flex: 1 1 400px; /* 画像エリア */
-        }
-        .env-main-photo img {
-          width: 100%;
-          height: auto;
-          border-radius: 12px;
-          box-shadow: 0 12px 30px rgba(0,0,0,0.5);
-          object-fit: cover;
-        }
+  <style>
+    /* 教室環境セクション専用の修正スタイル */
+    .env-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      align-items: flex-start;
+    }
+    .env-description { flex: 1 1 450px; }
+    .env-main-photo { flex: 1 1 400px; }
+    
+    .env-main-photo img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+      object-fit: cover;
+    }
 
-        /* 個別カードの調整（画像がない分、スッキリと） */
-        .env-info-card {
-          background: var(--card-strong);
-          padding: 20px;
-          border-radius: 12px;
-          border: 1px solid rgba(212, 175, 55, 0.1);
-          margin-bottom: 20px;
-          transition: all 0.3s var(--ease);
-          cursor: pointer;
-        }
-        .env-info-card:hover {
-          transform: translateY(-3px);
-          border-color: var(--accent);
-          box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-        }
-        .env-info-card h3 {
-          color: var(--accent);
-          margin-bottom: 8px;
-          font-size: 1.15rem;
-          display: flex;
-          align-items: center;
-          gap: 10px;
-        }
-        .env-info-card p {
-          font-size: 0.9rem;
-          margin-bottom: 0;
-          color: var(--muted);
-        }
+    .env-info-card {
+      background: var(--card-strong);
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid rgba(212, 175, 55, 0.1);
+      margin-bottom: 20px;
+      transition: all 0.3s var(--ease);
+      cursor: pointer;
+    }
+    .env-info-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+    .env-info-card h3 {
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-size: 1.15rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .env-info-card p { font-size: 0.9rem; margin-bottom: 0; color: var(--muted); }
 
-        @media (max-width: 768px) {
-          .env-content { flex-direction: column-reverse; } /* スマホでは画像を先に、または後に */
-        }
-      </style>
+    /* 【重要】スマホで余計なスペースを消す設定 */
+    @media (max-width: 768px) {
+      .env-content { 
+        display: block !important; /* 横並び設定を解除 */
+      }
+      .env-description { 
+        margin-bottom: 10px; /* カードと写真の間の最小限の隙間 */
+      }
+      .env-main-photo img {
+        max-height: 450px; /* 写真が大きくなりすぎないように調整 */
+        object-fit: contain;
+      }
+    }
+  </style>
+
+  <div class="section-inner">
+    <h2 class="reveal">教室環境</h2>
+    <div class="env-content">
+      <div class="env-description">
+        <div class="env-info-card reveal">
+          <h3><span>📖</span>綺麗な自習スペース</h3>
+          <p>授業前後や授業がない日も利用可能。静かで集中できる環境を維持しています。充電ポートも完備しております。</p>
+        </div>
+        <div class="env-info-card reveal">
+          <h3><span>✨</span>快適な学習空間</h3>
+          <p>空気清浄機を導入するなど衛生的な環境づくりに努めております。広々した机で、教材の出し入れの手間も減らしています。</p>
+        </div>
+      </div>
+      <div class="env-main-photo reveal">
+        <img src="environment_main.jpeg" alt="教室の全景" class="zoom-in">
+      </div>
+    </div>
+  </div>
+</section>
 
       <div class="section-inner">
         <h2 class="reveal">教室環境</h2>
