@@ -210,6 +210,19 @@
   border-color: var(--accent);
   box-shadow: 0 12px 30px rgba(0,0,0,0.6) !important;
 }
+    /* --- 追加分：全画面メニュー内の文字色を三本線と同じ色にする --- */
+#menu-overlay .overlay-nav a {
+  color: var(--accent) !important; /* 三本線と同じ金色に固定 */
+  font-size: 1.8rem;               /* 文字の大きさを少しアップ */
+  font-weight: 800;                /* 文字を太くしてハッキリさせる */
+  text-decoration: none;           /* 下線を消す */
+  transition: opacity 0.3s;        /* ホバー時の変化を滑らかに */
+}
+
+/* ホバーした時に少し透明にして反応を出す */
+#menu-overlay .overlay-nav a:hover {
+  opacity: 0.7;
+}
   </style>
 </head>
 <body>
@@ -308,6 +321,18 @@
     @media (max-width:768px){
       .slider-container { max-height: 450px; }
     }
+    /* PCでのフッター隠れ防止対策 */
+@media (min-width: 769px) {
+  .wrap {
+    padding-bottom: 120px !important; /* 下部固定ボタンの分だけ余白を確保 */
+  }
+}
+
+/* フッター自体の重なり順を調整 */
+footer {
+  position: relative;
+  z-index: 10;
+}
   </style>
 
   <div class="section-inner">
