@@ -5,79 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>雄大塾 | 個別指導</title>
   <style>
-    /* トップへ戻るボタン */
-    #back-to-top {
-      position: fixed;
-      right: 20px;
-      bottom: 100px; /* 下部の固定CTAと被らない位置 */
-      width: 44px;
-      height: 44px;
-      background: var(--accent);
-      color: var(--bg-bottom);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      cursor: pointer;
-      z-index: 1000;
-      opacity: 0; /* 最初は隠しておく */
-      transition: all 0.3s var(--ease);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    }
-    #back-to-top.show { opacity: 1; }
-
-    /* 固定メニューボタン（三本リーダー） */
-    #fixed-menu-btn {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      width: 44px;
-      height: 44px;
-      background: rgba(18, 37, 60, 0.8);
-      backdrop-filter: blur(5px);
-      border: 1px solid var(--accent);
-      border-radius: 8px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 5px;
-      cursor: pointer;
-      z-index: 2000;
-    }
-    #fixed-menu-btn span {
-      width: 24px;
-      height: 2px;
-      background: var(--accent);
-      transition: all 0.3s;
-    }
-
-    /* 全画面メニュー */
-    #menu-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(7, 18, 31, 0.98);
-      z-index: 1999;
-      display: none; /* 初期状態は非表示 */
-      align-items: center;
-      justify-content: center;
-    }
-    .overlay-nav {
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-      text-align: center;
-    }
-    .overlay-nav a {
-      font-size: 1.5rem;
-      color: #fff;
-      font-weight: 800;
-      text-decoration: none;
-    }
     :root{
       --bg-top:#12253c;
       --bg-bottom:#07121f;
@@ -100,157 +27,131 @@
     a{color:var(--accent);text-decoration:none}
     .wrap{max-width:var(--maxw);margin:0 auto;padding:20px;position:relative;z-index:1}
     
-   header {
+    header {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      /* 背景：現在の紺色に白を85%混ぜた明るい色 */
       background: color-mix(in srgb, var(--bg-top), #fff 70%);
-      /* ヘッダーを左右の端まで広げる調整 */
       margin: -20px -20px 20px -20px;
       padding: 12px 20px;
       border-radius: 0 0 12px 12px;
     }
     
     .brand { display: flex; align-items: center; gap: 12px; }
-    
-    /* アイコンのサイズが大きくならないよう固定 */
-    .logo {
-      width: 48px;  /* ここでサイズを固定 */
-      height: 48px;
-      background: transparent;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0; /* 圧縮されないように固定 */
-    }
+    .logo { width: 48px; height: 48px; background: transparent; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .logo img { width: 100%; height: 100%; object-fit: contain; }
-    /* ヘッダー内の文字色を黒・濃いグレーに変更 */
     .brand div { color: #333 !important; }
     
-/* 住所の色を濃いグレー（または黒）に変更 */
+    /* 住所の色を濃く、視認性を向上 */
     .brand div div[style*="color:var(--muted)"] {
-      color: #333 !important; /* #666から#333に変更して濃くしました */
-      opacity: 0.9;            /* 透明度をほぼなくしてハッキリさせました */
-      font-weight: 500;       /* 少しだけ太くして視認性を上げました */
+      color: #333 !important;
+      opacity: 0.9;
+      font-weight: 500;
     }
+
     nav { display: flex; gap: 5px; align-items: center; flex-wrap: nowrap; }
+    nav a { padding: 6px 8px; border-radius: 8px; color: #222 !important; font-weight: 700; white-space: nowrap; font-size: 0.9rem; }
+    nav a:hover { background: rgba(0,0,0,0.05); color: #000 !important; }
     
-    /* ナビゲーションの文字色を黒系に変更 */
-    nav a {
-      padding: 6px 8px;
-      border-radius: 8px;
-      color: #222 !important;
-      font-weight: 700;
-      white-space: nowrap;
-      font-size: 0.9rem;
-    }
-    
-    /* ホバー時の背景色を少し暗くして反応させる */
-    nav a:hover {
-      background: rgba(0,0,0,0.05);
-      color: #000 !important;
-    }
-    
-    section{width:100%;padding:80px 0;box-sizing:border-box}
+    section{width:100%;padding:60px 0;box-sizing:border-box}
     section.even{background: rgba(255,255,255,0.02);}
-    .section-inner{display:flex;flex-wrap:wrap;align-items:center;gap:40px;padding:0 20px;max-width:var(--maxw);margin:0 auto}
+    .section-inner{display:flex;flex-wrap:wrap;align-items:center;gap:30px;padding:0 20px;max-width:var(--maxw);margin:0 auto}
     .section-left, .section-right{flex:1 1 400px;}
     
-    /* PC・スマホ両方で見切れないための画像設定 */
     .section-photo {
       width: 100%;
-      max-height: 550px; /* PCでの巨大化を防止 */
-      aspect-ratio: auto; 
+      max-height: 550px;
       border-radius: 12px;
       display: block;
-      object-fit: contain; /* 画像全体を表示し、見切れを防ぐ */
+      object-fit: cover;
       background: rgba(255,255,255,0.02);
       box-shadow: 0 12px 30px rgba(0,0,0,0.5);
-      margin: 0 auto;
     }
 
     h1{font-size:clamp(1.8rem,5vw,2.8rem);margin-bottom:20px;line-height:1.3}
-    h2{font-size:1.8rem;margin-bottom:20px;padding-left:12px;border-left:6px solid var(--accent)}
+    h2{font-size:1.8rem;margin-bottom:20px;padding-left:12px;border-left:6px solid var(--accent); width:100%; text-align:left;}
     p{color:var(--muted);margin-bottom:20px}
-    .feature{background:var(--card);padding:24px;border-radius:12px;box-shadow:0 8px 22px rgba(0,0,0,0.45);margin-bottom:20px}
-    .feature h3{color:var(--accent);margin-bottom:8px}
-    
-    .btn-link{background:var(--accent);color:#07121f;padding:14px 24px;border-radius:8px;font-weight:800;display:inline-block;width:100%;text-align:center}
-    .line-btn{background:#06c755;color:#fff;padding:14px 24px;border-radius:8px;font-weight:900;display:inline-flex;align-items:center;justify-content:center;width:100%;margin-bottom:12px}
-    
-    .reveal{opacity:0;transform:translateY(30px);transition:all .8s var(--ease)}
-    .reveal.in{opacity:1;transform:none}
-    .zoom-in{opacity:0;transform:scale(.95);transition:all .8s var(--ease)}
-    .zoom-in.in{opacity:1;transform:none}
+
+    /* ホバー・クリックイベント用共通設定 */
+    .feature, .env-info-card {
+      background:var(--card);
+      padding:24px;
+      border-radius:12px;
+      box-shadow:0 8px 22px rgba(0,0,0,0.45);
+      margin-bottom:20px;
+      transition: transform 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease) !important;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+    .feature:hover, .env-info-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.6) !important;
+    }
+    .feature h3, .env-info-card h3{color:var(--accent);margin-bottom:8px}
+
+    /* 教室環境セクション専用スタイル */
+    .env-content { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; width: 100%; }
+    .env-description { flex: 1 1 450px; }
+    .env-main-photo { flex: 1 1 400px; }
+    .env-main-photo img { width: 100%; height: auto; border-radius: 12px; box-shadow: 0 12px 30px rgba(0,0,0,0.5); }
+
+    /* コース紹介スライダー */
+    .slider-container { width: 100%; max-height: 550px; aspect-ratio: 4 / 3; border-radius: 12px; overflow: hidden; position: relative; box-shadow: 0 12px 30px rgba(0,0,0,0.5); }
+    .slider-wrapper { display: flex; width: 300%; height: 100%; animation: slide-album 12s infinite; }
+    .slider-wrapper img { width: calc(100% / 3); height: 100%; object-fit: cover; }
+    @keyframes slide-album {
+      0%, 30% { transform: translateX(0); }
+      33%, 63% { transform: translateX(-33.33%); }
+      66%, 96% { transform: translateX(-66.66%); }
+      100% { transform: translateX(0); }
+    }
+
+    /* 固定パーツ */
+    #back-to-top { position: fixed; right: 20px; bottom: 100px; width: 44px; height: 44px; background: var(--accent); color: var(--bg-bottom); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; z-index: 1000; opacity: 0; transition: all 0.3s var(--ease); box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+    #back-to-top.show { opacity: 1; }
+    #fixed-menu-btn { position: fixed; top: 20px; right: 20px; width: 44px; height: 44px; background: rgba(18, 37, 60, 0.8); backdrop-filter: blur(5px); border: 1px solid var(--accent); border-radius: 8px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; cursor: pointer; z-index: 2000; }
+    #fixed-menu-btn span { width: 24px; height: 2px; background: var(--accent); }
+
+    #menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(7, 18, 31, 0.85) !important; backdrop-filter: blur(8px); z-index: 1999; display: none; align-items: center; justify-content: center; }
+    .overlay-nav { display: flex; flex-direction: column; gap: 30px; text-align: center; }
+    .overlay-nav a { color: rgba(212, 175, 55, 0.8) !important; font-size: 1.3rem; font-weight: 700; text-decoration: none; transition: all 0.3s; letter-spacing: 0.05em; }
+    .overlay-nav a:hover { color: var(--accent) !important; opacity: 1; }
 
     .sticky-cta{position:fixed;left:0;right:0;bottom:0;padding:12px;background:rgba(7,18,31,0.95);backdrop-filter:blur(10px);z-index:999;display:flex;gap:8px}
     .sticky-cta .btn{flex:1;text-align:center;padding:12px 8px;border-radius:8px;font-size:0.85rem;font-weight:900;display:flex;align-items:center;justify-content:center;text-decoration:none}
     .sticky-line{background:#06c755;color:#fff}
     .sticky-hp{background:#fff;color:#07121f}
 
+    .reveal{opacity:0;transform:translateY(30px);transition:all .8s var(--ease)}
+    .reveal.in{opacity:1;transform:none}
+    .zoom-in{opacity:0;transform:scale(.95);transition:all .8s var(--ease)}
+    .zoom-in.in{opacity:1;transform:none}
+
+    @media (min-width: 769px) { .wrap { padding-bottom: 150px !important; } }
     @media (max-width:768px){
-      section{padding:50px 0}
+      section{padding:40px 0}
       .section-inner{gap:20px;flex-direction:column}
-      .section-photo { max-height: 450px; } /* スマホで見やすい高さに制限 */
       body{padding-bottom:100px}
       h1{font-size:1.6rem}
+      .env-content { flex-direction: column-reverse; }
     }
-    /* カード要素（.feature と .env-card）共通のスタイル */
-.feature, .env-card {
-  transition: transform 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease) !important;
-  border: 1px solid transparent;
-  cursor: pointer; /* 全て指マークにする */
-}
-
-/* ホバー時の動き */
-.feature:hover, .env-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--accent);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.6) !important;
-}
-/* --- 全画面メニュー内の文字デザイン調整 --- */
-#menu-overlay .overlay-nav a {
-  /* ①色を三本線より少しだけ落ち着いた色（透明度0.8）にする */
-  color: rgba(212, 175, 55, 0.8) !important; 
-  /* ③文字を少し小さく調整 */
-  font-size: 1.3rem;               
-  font-weight: 700;                
-  text-decoration: none;           
-  transition: all 0.3s;
-  letter-spacing: 0.05em; /* 文字の間隔を少し広げて上品に */
-}
-
-/* ②背景の透明度を上げる（0.98から0.85へ変更） */
-#menu-overlay {
-  background: rgba(7, 18, 31, 0.85) !important;
-  backdrop-filter: blur(8px); /* 後ろをボカすことで、透けていても文字が読みやすくなります */
-}
-
-/* ホバー時に色をハッキリさせる演出 */
-#menu-overlay .overlay-nav a:hover {
-  color: var(--accent) !important;
-  opacity: 1;
-}
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
       <div class="brand">
-        <div class="logo">
-          <img src="wolfly.png" alt="雄大塾 ロゴ">
-        </div>
+        <div class="logo"><img src="wolfly.png" alt="雄大塾 ロゴ"></div>
         <div>
           <div style="font-weight:800">個別指導 雄大塾(個人)</div>
           <div style="color:var(--muted);font-size:0.85rem">京都市伏見区深草直違橋片町527-2</div>
         </div>
       </div>
       <nav>
-        <a href="#about">講師紹介</a>
+        <a href="#about">紹介</a>
         <a href="#courses">コース</a>
-        <a href="#environment">環境</a>
         <a href="#access">アクセス</a>
         <a href="#contact">問合せ</a>
       </nav>
@@ -272,14 +173,12 @@
     <section id="about" class="even">
       <div class="section-inner">
         <div class="section-left">
-          <h2 class="reveal">講師紹介</h2>
-          <p class="reveal">講師は塾長のみ。深中・桃高卒業。数学・英語をはじめ、物理・化学など理系科目全般に精通。センター試験では数学・物理・化学満点を取得。中・高と(ほぼ)オール5(体育は4)で難関高対策に強み。
-            <br><br>　　　　　　【略歴】<br>桃山高校自然科学科　卒業<br>神戸大学工学部機械工学科　中退<br>京都教育大学教育学部数学領域　卒業</p>
+          <h2 class="reveal">徹底個別</h2>
+          <p class="reveal">講師は塾長のみ。同じ時間帯の生徒は最大2名（振替時のみ最大3名）までの、集中できる環境を整えています。</p>
           <ul style="color:var(--muted); padding-left:20px" class="reveal">
-            <li>小学校教諭二種免許状</li>
-            <li>中学校教諭一種免許状(数学)</li>
-            <li>高等学校教諭一種免許状(数学)</li>
-          
+            <li>塾長による直接指導</li>
+            <li>最大2名の少人数制</li>
+            <li>集中できる自習スペース</li>
           </ul>
         </div>
         <div class="section-right">
@@ -288,187 +187,69 @@
       </div>
     </section>
 
-<section id="courses">
-  <style>
-    /* スライダー全体のコンテナ */
-    .slider-container {
-      width: 100%;
-      max-height: 550px;
-      aspect-ratio: 4 / 3; /* 塾の雰囲気が伝わりやすい比率 */
-      border-radius: 12px;
-      overflow: hidden; /* 枠外の画像を見えなくする */
-      position: relative;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
-      background: rgba(255,255,255,0.02);
-    }
-
-    /* 画像を横に並べる枠 */
-    .slider-wrapper {
-      display: flex;
-      width: 300%; /* 3枚分なので300% */
-      height: 100%;
-      animation: slide-album 12s infinite; /* 12秒で一周、無限ループ */
-    }
-
-    /* 各画像の設定 */
-    .slider-wrapper img {
-      width: calc(100% / 3); /* 300%の中の1/3 */
-      height: 100%;
-      object-fit: cover; /* 枠に合わせて綺麗に切り抜き */
-    }
-
-    /* 横スライドアニメーションの定義 */
-    @keyframes slide-album {
-      0% { transform: translateX(0); }
-      30% { transform: translateX(0); }       /* 1枚目表示 */
-      33% { transform: translateX(-33.33%); } /* スライド移動 */
-      63% { transform: translateX(-33.33%); } /* 2枚目表示 */
-      66% { transform: translateX(-66.66%); } /* スライド移動 */
-      96% { transform: translateX(-66.66%); } /* 3枚目表示 */
-      100% { transform: translateX(0); }      /* 1枚目に戻る */
-    }
-
-    @media (max-width:768px){
-      .slider-container { max-height: 450px; }
-    }
-    /* PCでのフッター隠れ防止対策 */
-@media (min-width: 769px) {
-  .wrap {
-    padding-bottom: 120px !important; /* 下部固定ボタンの分だけ余白を確保 */
-  }
-}
-
-/* フッター自体の重なり順を調整 */
-footer {
-  position: relative;
-  z-index: 10;
-}
-  </style>
-
-  <div class="section-inner">
-    <div class="section-left">
-      <h2 class="reveal">コース紹介</h2>
-      <div class="feature reveal">
-        <h3>週1回コース（1回115分）</h3>
-        <p>部活動との両立や、まずは学習習慣を身につけたい方におすすめです。小学生高学年以上なら「案外あっという間だった」という生徒さんがほとんど。</p>
-      </div>
-      <div class="feature reveal">
-        <h3>週2回コース（1回115分）</h3>
-        <p>苦手科目の克服や、志望校合格に向けた受験対策に適しています。長期休暇の月だけ週2回通うことも可能です。学力向上には「自学での繰り返しの演習が必須」と考えておりますので、週2回以上の頻度のコースは現在用意していません。</p>
-      </div>
-      <p style="font-size:0.9rem; color:var(--muted)">同じ時間帯の生徒は最大2名（振替時のみ最大3名）までの、集中できる環境を整えています。<br>※料金等はページ下部のHPからご確認ください。</p>
-    </div>
-
-    <div class="section-right">
-      <div class="slider-container zoom-in">
-        <div class="slider-wrapper">
-          <img src="1.jpeg" alt="コースイメージ1">
-          <img src="2.jpeg" alt="コースイメージ2">
-          <img src="3.jpeg" alt="コースイメージ3">
+    <section id="courses">
+      <div class="section-inner">
+        <div class="section-left">
+          <h2 class="reveal">コース紹介</h2>
+          <div class="feature reveal">
+            <h3>週1回コース</h3>
+            <p>部活動との両立や、まずは学習習慣を身につけたい方に。</p>
+          </div>
+          <div class="feature reveal">
+            <h3>週2回コース</h3>
+            <p>苦手科目の克服や、志望校合格に向けた受験対策に。</p>
+          </div>
+          <p style="font-size:0.9rem; color:var(--muted)">※料金等はページ下部のHPからご確認ください。</p>
+        </div>
+        <div class="section-right">
+          <div class="slider-container zoom-in">
+            <div class="slider-wrapper">
+              <img src="1.jpeg" alt="コースイメージ1">
+              <img src="2.jpeg" alt="コースイメージ2">
+              <img src="3.jpeg" alt="コースイメージ3">
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-<section id="environment" class="even">
-      <style>
-        /* 教室環境セクション用のカスタムスタイル */
-        .env-content {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 40px;
-          align-items: flex-start;
-        }
-        .env-description {
-          flex: 1 1 450px; /* 説明文エリア */
-        }
-        .env-main-photo {
-          flex: 1 1 400px; /* 画像エリア */
-        }
-        .env-main-photo img {
-          width: 100%;
-          height: auto;
-          border-radius: 12px;
-          box-shadow: 0 12px 30px rgba(0,0,0,0.5);
-          object-fit: cover;
-        }
+    </section>
 
-        /* 個別カードの調整（画像がない分、スッキリと） */
-        .env-info-card {
-          background: var(--card-strong);
-          padding: 20px;
-          border-radius: 12px;
-          border: 1px solid rgba(212, 175, 55, 0.1);
-          margin-bottom: 20px;
-          transition: all 0.3s var(--ease);
-          cursor: pointer;
-        }
-        .env-info-card:hover {
-          transform: translateY(-3px);
-          border-color: var(--accent);
-          box-shadow: 0 8px 20px rgba(0,0,0,0.4);
-        }
-        .env-info-card h3 {
-          color: var(--accent);
-          margin-bottom: 8px;
-          font-size: 1.15rem;
-          display: flex;
-          align-items: center;
-          gap: 10px;
-        }
-        .env-info-card p {
-          font-size: 0.9rem;
-          margin-bottom: 0;
-          color: var(--muted);
-        }
-
-        @media (max-width: 768px) {
-          .env-content { flex-direction: column-reverse; } /* スマホでは画像を先に、または後に */
-        }
-      </style>
-
+    <section id="environment" class="even">
       <div class="section-inner">
         <h2 class="reveal">教室環境</h2>
         <div class="env-content">
-          
           <div class="env-description">
             <div class="env-info-card reveal">
               <h3><span>📖</span>綺麗な自習スペース</h3>
               <p>授業前後や授業がない日も利用可能。静かで集中できる環境を維持しています。充電ポートも完備しております。</p>
             </div>
-
             <div class="env-info-card reveal">
               <h3><span>✨</span>快適な学習空間</h3>
               <p>空気清浄機を導入するなど衛生的な環境づくりに努めております。広々した机で、教材の出し入れの手間も減らしています。</p>
             </div>
           </div>
-
           <div class="env-main-photo reveal">
             <img src="environment_main.jpeg" alt="教室の全景" class="zoom-in">
           </div>
-
         </div>
       </div>
     </section>
-    <section id="access" class="even">
+
+    <section id="access">
       <div class="section-inner">
         <div style="flex:1 1 100%;">
           <h2 class="reveal">アクセス</h2>
-          <p class="reveal">〒612-0867 京都市伏見区深草直違橋片町527-2（墨染駅より徒歩7分）<br>※駐輪場・駐車場はございません。</p>
+          <p class="reveal">〒612-0867 京都市伏見区深草直違橋片町527-2（墨染駅より徒歩7分）</p>
           <div class="reveal" style="width:100%; border-radius:12px; overflow:hidden; box-shadow:0 12px 30px rgba(0,0,0,0.5); aspect-ratio: 16 / 9;">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13080.770342040722!2d135.76062655465174!3d34.95178145285494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60010f74df84e4ff%3A0x69433c09f59a403e!2z6ZuE5aSn5aG-!5e0!3m2!1sja!2sjp!4v1777372529180!5m2!1sja!2sjp"
-              width="100%" height="100%" style="border:0; display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3270.3662584102!2d135.7702812!3d34.9474773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60010f3689408b0b%3A0xc3457199990815!2z5pS_5YmN56S-!5e0!3m2!1sja!2sjp!4v1714181821000!5m2!1sja!2sjp" width="100%" height="100%" style="border:0; display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="contact">
+    <section id="contact" class="even">
       <div class="section-inner">
         <div class="section-left" style="flex:1 1 100%; text-align:center;">
-          <h2 class="reveal" style="border:none; padding:0;">お問い合わせ</h2>
+          <h2 class="reveal" style="border:none; padding:0; text-align:center;">お問い合わせ</h2>
           <p class="reveal">公式LINEまたは専用フォームより承っております。業者様はメールのみ対応いたします。</p>
           <div style="max-width:400px; margin:0 auto;">
             <a class="line-btn reveal" href="https://lin.ee/8lfxGZa" target="_blank">LINEで体験申込・お問合せ</a>
@@ -478,72 +259,20 @@ footer {
       </div>
     </section>
 
-    <footer style="text-align:center;padding:40px 0;color:var(--muted);font-size:0.9rem">
+    <footer style="text-align:center;padding:40px 0;color:var(--muted);font-size:0.9rem; position:relative; z-index:10;">
       © 2026 雄大塾
     </footer>
   </div>
 
   <div class="sticky-cta">
     <a class="btn sticky-line" href="https://lin.ee/8lfxGZa">LINEで<br>体験申込・お問合せ</a>
-    <a class="btn sticky-hp" href="https://curuchang.hatenablog.com/entry/2024/08/21/121912">最新の募集状況など<br>(HPへ)</a>
+    <a class="btn sticky-hp" href="https://curuchang.hatenablog.com/entry/2024/08/21/121912">最新の募集状況など<br>(ブログへ)</a>
   </div>
 
-  <script>
-    // スクロール量に合わせて「トップへ戻る」ボタンを表示
-    window.addEventListener('scroll', () => {
-      const btn = document.getElementById('back-to-top');
-      if (window.scrollY > 300) {
-        btn.classList.add('show');
-      } else {
-        btn.classList.remove('show');
-      }
-    });
-
-    // メニューの開閉
-    function toggleMenu() {
-      const overlay = document.getElementById('menu-overlay');
-      const btn = document.getElementById('fixed-menu-btn');
-      
-      if (overlay.style.display === 'flex') {
-        overlay.style.display = 'none';
-        document.body.style.overflow = 'auto'; // スクロール再開
-      } else {
-        overlay.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // スクロール禁止
-      }
-    }
-    document.addEventListener('DOMContentLoaded', function(){
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in');
-          }
-        });
-      }, {threshold: 0.1});
-      document.querySelectorAll('.reveal, .zoom-in').forEach(el => observer.observe(el));
-    });
-    document.addEventListener('DOMContentLoaded', function(){
-      // ...既存のobserverのコード...
-
-      // 追加：.feature と .env-card をクリックしたら #contact へ飛ばす
-      document.querySelectorAll('.feature, .env-card').forEach(el => {
-        el.addEventListener('click', () => {
-          const contactSection = document.querySelector('#contact');
-          if (contactSection) {
-            contactSection.scrollIntoView({ behavior: 'smooth' });
-          }
-        });
-      });
-    });
-  </script>
-<div id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</div>
-
+  <div id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</div>
   <div id="fixed-menu-btn" onclick="toggleMenu()">
-    <span></span>
-    <span></span>
-    <span></span>
+    <span></span><span></span><span></span>
   </div>
-
   <div id="menu-overlay">
     <nav class="overlay-nav">
       <a href="#top" onclick="toggleMenu()">トップ</a>
@@ -554,5 +283,44 @@ footer {
       <a href="#contact" onclick="toggleMenu()">お問い合わせ</a>
     </nav>
   </div>
+
+  <script>
+    // スクロール検知
+    window.addEventListener('scroll', () => {
+      const btn = document.getElementById('back-to-top');
+      if (window.scrollY > 300) { btn.classList.add('show'); }
+      else { btn.classList.remove('show'); }
+    });
+
+    // メニュー開閉
+    function toggleMenu() {
+      const overlay = document.getElementById('menu-overlay');
+      if (overlay.style.display === 'flex') {
+        overlay.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      } else {
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      // アニメーション監視
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) { entry.target.classList.add('in'); }
+        });
+      }, {threshold: 0.1});
+      document.querySelectorAll('.reveal, .zoom-in').forEach(el => observer.observe(el));
+
+      // カードクリックでお問合せへ
+      document.querySelectorAll('.feature, .env-info-card').forEach(el => {
+        el.addEventListener('click', () => {
+          const contactSection = document.querySelector('#contact');
+          if (contactSection) { contactSection.scrollIntoView({ behavior: 'smooth' }); }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
