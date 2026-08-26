@@ -257,6 +257,27 @@ h1 span {
   opacity: 1;
 }
   </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "雄大塾",
+  "alternateName": "雄大塾（個人）",
+  "url": "https://yudai-cram.com",
+  "image": "https://yudai-cram.com/IMG_2395.jpeg",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "527-2",
+    "addressLocality": "京都市伏見区深草直違橋片町",
+    "addressRegion": "京都府",
+    "postalCode": "612-0867",
+    "addressCountry": "JP"
+  },
+  "priceRange": "¥20000-¥36000",
+  "description": "京都市の個別指導塾「雄大塾」。アルバイト講師ではなく塾長自らが直接教える1対2の個別指導で、1コマ115分の中で複数教科を効率よく学べる柔軟さが強み。小学５、６年生・中学生・高校生対象。"
+}
+</script>
+  
 </head>
 <body>
   <div class="wrap">
